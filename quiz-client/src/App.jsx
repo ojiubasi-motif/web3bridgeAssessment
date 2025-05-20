@@ -1,18 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./components/layout/Home";
+import MissingPage from "./components/pages/MissingPage";
+
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <Routes>
+        {/* <Route path="login" element={<Login/>} />
+        <Route path="signup" element={<Signup/>} /> */}
+
+        <Route path="/" element={<Home/>} >
+          <Route path="" element={<Unauthorized/>}/>
+          <Route index element={<Dashboard/>} />
+          <Route path="attendance" element={<Attendance/>} />
+          <Route path="scores" element={<ScoresView/>} />
+          <Route path="students" element={<Allstudents/>} />
+          {/* <Route path="schools" element={<ALLSchools/>} /> */}
+          <Route path="schools/:sch_id" element={<School/>}>
+            <Route index element={<Classes/>}/>
+            <Route path="staff" element={<Staff/>}/>
+            <Route path="sessions" element={<Sessions/>}/>
+            <Route path="terms" element={<Terms/>}/>
+            <Route path="subjects" element={<Subjects/>}/>
+          </Route>
+          <Route path="createscores" element={<CreateScores/>} />
+
+        </Route>
+
+        <Route path="*" element={<MissingPage/>} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
